@@ -2,10 +2,7 @@ package com.tester.demo.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 //import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.time.LocalDate;
@@ -20,27 +17,15 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NonNull
     private String name;
+    @NonNull
     private String surname;
-
     @Email
     private String mail;
-
     private Integer balance;
     private LocalDate registrationDate;
+    @NonNull
     private String login;
     private String password;
-
-    public User(String login, String password, String mail, String name, String surname) {
-        this.login = login;
-        this.password = password;
-        //this.password = hashPassword(password);
-        this.mail = mail;
-        this.name = name;
-        this.surname = surname;
-    }
-
-//    private String hashPassword(String password) {
-//        return BCrypt.hashpw(password, BCrypt.gensalt());
-//    }
 }

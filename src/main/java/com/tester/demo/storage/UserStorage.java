@@ -4,6 +4,7 @@ import com.tester.demo.model.User;
 import com.tester.demo.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+//import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.time.LocalDate;
 import java.util.Collection;
@@ -18,9 +19,10 @@ public class UserStorage {
     }
 
     public User addUser(User user) {
-        userRepository.save(user);
         user.setBalance(0);
         user.setRegistrationDate(LocalDate.now());
+        //user.setPassword(hashPassword(user.getPassword()));
+        userRepository.save(user);
         return user;
     }
 
@@ -31,4 +33,8 @@ public class UserStorage {
     public void deleteUserById(Integer userId) {
         userRepository.deleteById(userId);
     }
+
+//    private String hashPassword(String password) {
+//        return BCrypt.hashpw(password, BCrypt.gensalt());
+//    }
 }
