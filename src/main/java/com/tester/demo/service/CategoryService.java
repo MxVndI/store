@@ -23,4 +23,8 @@ public class CategoryService {
     public Collection<Category> getCategories() {
         return categoryStorage.getCategories();
     }
+
+    public Integer getCategoryByName(String name) {
+        return categoryStorage.getCategoryByName(name);
+    }
 }

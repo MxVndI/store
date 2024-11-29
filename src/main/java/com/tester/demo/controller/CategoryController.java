@@ -28,4 +28,9 @@ public class CategoryController {
     public Category addCategory(@RequestBody @Valid Category category) {
         return categoryService.addCategory(category);
     }
+
+    @GetMapping("/getId")
+    public Integer getCategoryByName(@RequestParam String name) {
+        return categoryService.getCategoryByName(name);
+    }
 }

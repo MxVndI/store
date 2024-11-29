@@ -28,4 +28,10 @@ public class CategoryStorage {
     public void deleteCategoryById(Integer categoryId) {
         categoryRepository.deleteById(categoryId);
     }
+
+    public Integer getCategoryByName(String name) {
+        System.out.println(name);
+        System.out.println(categoryRepository.findByNameLike(name));
+       return categoryRepository.findByNameLike(name).getId();
+    }
 }
