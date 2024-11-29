@@ -3,12 +3,11 @@ package com.tester.demo.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "items")
-@ToString
+@ToString(exclude = "categories")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -18,13 +17,13 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @NonNull
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "item_category",
+            name = "item_categories",
             joinColumns = @JoinColumn(name = "item_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
-    private Set<Category> categories = new HashSet<>();
+    private List<Category> categories;
     @NonNull
     private String name;
     @NonNull
@@ -32,4 +31,6 @@ public class Item {
     @NonNull
     private Integer price;
     private String image;
+    private Integer count;
+
 }

@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
+
 
 @Entity
 @Table(name = "categories")
@@ -21,8 +21,10 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name = "name", unique = true)
     private String name;
-    @ManyToMany(mappedBy = "categories")
+
     @JsonIgnore
-    private Set<Item> items = new HashSet<>();
+    @ManyToMany(mappedBy = "categories", fetch = FetchType.LAZY)
+    private List<Item> items;
 }

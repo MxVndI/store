@@ -1,5 +1,6 @@
 package com.tester.demo.storage;
 
+import com.tester.demo.model.cart.Cart;
 import com.tester.demo.model.User;
 import com.tester.demo.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,7 @@ import java.util.Collection;
 @RequiredArgsConstructor
 public class UserStorage {
     private final UserRepository userRepository;
+    private final CartStorage cartStorage;
 
     public User getUserById(int userId) {
         return userRepository.findById(userId).get();
@@ -23,6 +25,9 @@ public class UserStorage {
         user.setRegistrationDate(LocalDate.now());
         //user.setPassword(hashPassword(user.getPassword()));
         userRepository.save(user);
+        Cart cart = new Cart();
+        cart.setUser(user);
+        cartStorage.addCart(cart);
         return user;
     }
 

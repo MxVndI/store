@@ -7,9 +7,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @RestController
 @RequestMapping("store/items")
@@ -30,7 +28,7 @@ public class ItemController {
 
     @PostMapping
     public Item addItem(@RequestBody @Valid Item item) {
-        Set<Category> categories = new HashSet<>();
+        List<Category> categories = new ArrayList<>();
         for (Category category : item.getCategories()) {
             categories.add(categoryController.getCategoryById(category.getId()));
         }
